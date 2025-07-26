@@ -13,7 +13,7 @@ Este proyecto simula el tráfico de drones de entrega en una ciudad usando el fr
 ```bash
 python -m venv venv
 source venv/bin/activate
-pip install mesa networkx matplotlib
+pip install mesa==1.1.0 networkx matplotlib
 ```
 
 ## Ejecución
@@ -39,4 +39,4 @@ Luego abre http://localhost:8521 en tu navegador.
 
 ## Autor
 
-Desarrollado con Python, Mesa y NetworkX.
+Desarrollado con Python 3.10, Mesa y NetworkX.
