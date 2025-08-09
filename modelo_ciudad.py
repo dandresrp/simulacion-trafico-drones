@@ -70,13 +70,7 @@ class ModeloCiudad(Model):
         self.schedule.step()
         self.datacollector.collect(self)
 
-    # --- Terminación y reporte ---
     def _esta_bloqueado(self, dron: Dron) -> bool:
-        """Un dron está bloqueado si:
-        - no tiene ruta útil (ruta de longitud <= 1 desde su posición), o
-        - ha estado varios pasos sin poder moverse (atasco/congestión),
-        y aún no llegó al destino y no está sin batería.
-        """
         try:
             pos_actual = dron.pos if getattr(dron, "pos", None) is not None else dron.pos_ini
             umbral_estancado = 10
@@ -91,9 +85,6 @@ class ModeloCiudad(Model):
             return False
 
     def terminada(self) -> bool:
-        """La simulación termina cuando todos los drones están detenidos:
-        entregados, sin batería o bloqueados sin ruta.
-        """
         if not self.schedule.agents:
             return True
         for a in self.schedule.agents:
@@ -160,10 +151,6 @@ class ModeloCiudad(Model):
         }
 
     def run_until_done(self, max_steps: int | None = None) -> Dict[str, Any]:
-        """Ejecuta la simulación hasta que todos los drones se detengan o
-        hasta alcanzar max_steps si se especifica.
-        Devuelve un diccionario con el reporte final.
-        """
         pasos = 0
         if max_steps is None:
             while not self.terminada():

@@ -16,7 +16,6 @@ class Dron(Agent):
         self.paso_actual = 0
         self._bateria_reportada = False
         self.pasos_sin_mover = 0
-        # Ruta inicial
         self.ruta = self.calcular_ruta()
 
     def calcular_ruta(self, desde: Optional[Tuple[int, int]] = None, hasta: Optional[Tuple[int, int]] = None) -> List[Tuple[int, int]]:
@@ -69,7 +68,6 @@ class Dron(Agent):
             self.ruta = self.calcular_ruta(desde=pos_actual, hasta=self.pos_dest)
             self.paso_actual = 0
             self.pasos_sin_mover += 1
-            # Drenaje mínimo de batería aunque no se mueva para evitar ciclos infinitos
             prev = self.bateria
             self.bateria = max(0, self.bateria - 1)
             if self.bateria <= 0 and prev > 0 and not self._bateria_reportada and hasattr(self.model, "fallas_bateria"):
