@@ -10,11 +10,25 @@ Este proyecto simula el tráfico de drones de entrega en una ciudad usando el fr
 
 ## Instalación
 
-```bash
-python -m venv venv
-source venv/bin/activate
-pip install mesa==1.1.0 networkx matplotlib
-```
+Este proyecto está probado con Mesa 1.1.0 y Python 3.10. Recomendado usar un entorno virtual con Python 3.10 y las dependencias fijadas en `requirements.txt`.
+
+-   Bash/Zsh:
+
+    ```bash
+    python3.10 -m venv venv310
+    source venv310/bin/activate
+    pip install -U pip
+    pip install -r requirements.txt
+    ```
+
+-   Fish:
+
+    ```fish
+    python3.10 -m venv venv310
+    source venv310/bin/activate.fish
+    pip install -U pip
+    pip install -r requirements.txt
+    ```
 
 ## Ejecución
 
@@ -23,6 +37,16 @@ python servidor_visual.py
 ```
 
 Luego abre http://localhost:8521 en tu navegador.
+
+## Ejecución sin interfaz (reporte JSON)
+
+Para correr hasta que la simulación termine (cuando todos los drones se detienen) y obtener un reporte para tomar decisiones:
+
+```bash
+python run_headless.py
+```
+
+El reporte incluye parámetros del modelo, resultados (entregas, tasa de entrega, colisiones, desvíos, fallas de batería, drones bloqueados, tiempos de entrega) y recomendaciones accionables basadas en los datos.
 
 ## Descripción
 
